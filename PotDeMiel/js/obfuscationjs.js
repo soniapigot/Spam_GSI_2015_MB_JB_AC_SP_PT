@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  var m = "mailto:"
+  var m = "mailto:";
   var u = "dupond";
   var at = "@";
   var d = "mines-nantes";
@@ -8,7 +8,7 @@ $(document).ready(function() {
   var fr = "fr";
   var balise1 = document.createElement("a");
   balise1.href = m + u + at + d + p + fr;
-  balise1.text = "Email (concat)"
+  balise1.text = "Email (concat)";
   document.getElementById('ObfuscationJS1').appendChild(balise1);
 
   function decode(a) {
