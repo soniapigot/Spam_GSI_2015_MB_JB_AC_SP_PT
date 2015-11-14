@@ -3,9 +3,55 @@
  */
 
 var page = require('webpage').create();
-page.open('http://www.easyvirt.com/nous-contacter/', function(status) {
+var fs = require('fs');
+page.open('https://web.emn.fr/x-info/miel/PotDeMiel.php', function(status) {
+
     if (status !== 'success') {
     } else {
+        var css = page.evaluate(function(){
+            var scripts = [].slice.call(document.querySelectorAll("link"));
+            for (var i=0; i < scripts.length; i++){
+                var node = scripts[i];
+                if (node.parentNode) {
+                    node.parentNode.removeChild(node);
+                }
+            }
+
+            var a = [].slice.call(document.querySelectorAll("link"));
+            var aretourner = [];
+            for (var i=0; i < a.length; i++){
+                var src = a[i].getAttribute("href");
+                if (src!=undefined) {
+                    aretourner.push(src);
+                }
+
+            }
+            return aretourner;
+        });
+        console.log("link.length "+css.length);
+
+        var scripts = page.evaluate(function(){
+            var scripts = [].slice.call(document.querySelectorAll("script"));
+            for (var i=0; i < scripts.length; i++){
+                var node = scripts[i];
+                if (node.parentNode) {
+                    node.parentNode.removeChild(node);
+                }
+            }
+
+            var a = [].slice.call(document.querySelectorAll("script"));
+            var aretourner = [];
+            for (var i=0; i < a.length; i++){
+                var src = a[i].getAttribute("src");
+                if (src!=undefined) {
+                    aretourner.push(src);
+                }
+
+            }
+            return aretourner;
+        });
+        console.log("script.length "+scripts.length);
+
         var mailTos = page.evaluate(function() {
             var a = [].slice.call(document.querySelectorAll("a"));
             var aretourner = [];
@@ -20,7 +66,19 @@ page.open('http://www.easyvirt.com/nous-contacter/', function(status) {
         for (var i=0; i < mailTos.length; i++) {
             console.log(mailTos[i]);
         }
-        console.log(mailTos.length);
+        console.log("Nombre de mails recoltes "+mailTos.length);
+        var js = page.evaluate(function () {
+            return document;
+        });
+        //console.log(js.all[0].outerHTML);
+
+        //return mailTos;
+
+        var newAdress = js.all[0].outerHTML;
+        //var myObject = new ActiveXObject("Scripting.FileSystemObject");
+        //var newfile = myObject.createTex("C:\\Users\\Pierre\\Desktop\\ProjetOption\\JS\\Robot\\JS\\newAdress.html", true);
+        fs.write("D:\\XAMPP\\htdocs\\projetoption\\newAdress.html",newAdress,'w');
     }
+
     phantom.exit();
 });
