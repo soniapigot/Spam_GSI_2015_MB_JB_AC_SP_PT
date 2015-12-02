@@ -1,15 +1,21 @@
 /**
  * Created by Pierre on 19/10/2015.
  */
+// pas obfusquées + CSS + JS
 
+var system = require('system');
+var args = system.args;
 var page = require('webpage').create();
 var fs = require('fs');
-page.open('https://web.emn.fr/x-info/miel/PotDeMiel.php', function(status) {
+console.log(args[1]);
+page.open(args[1], function(status) {
 
     if (status !== 'success') {
+        console.log("echec")
     } else {
         var css = page.evaluate(function(){
-            var links = [].slice.call(document.querySelectorAll("link"));
+            [].slice.call(document.querySelectorAll("*")).forEach(function(arg,i){arg.removeAttribute("style");});
+            var links = [].slice.call(document.querySelectorAll("style"));
             for (var i=0; i < links.length; i++){
                 var node = links[i];
                 if (node.parentNode) {
