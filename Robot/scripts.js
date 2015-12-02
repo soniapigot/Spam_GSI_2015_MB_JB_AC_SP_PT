@@ -10,7 +10,7 @@ request('https://web.emn.fr/x-info/miel/css/style.css', function (error, respons
     if (!error && response.statusCode == 200) {
         var $ = cheerio.load(html);
         var a = $.html();
-        fs.writeFile("D:\\XAMPP\\htdocs\\projetoption\\css\\style.css",a);
+        fs.writeFile("D:\\XAMPP\\htdocs\\projetoption\\css\\toto\\style.css",a);
         console.log('done');
         //return a;
     }
