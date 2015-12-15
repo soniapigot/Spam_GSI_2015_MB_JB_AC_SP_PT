@@ -8,15 +8,23 @@ var args = system.args;
 var page = require('webpage').create();
 var fs = require('fs');
 
-//function robot() {
-//    for (var i=0;i<arguments.length;i++) {
-        page.open(args[1], function (status) {
+//args[1] est le premier argument qu'on passe quand on fait "phantomjs.exe robot.js {arg}". oui c'est pas comme pour
+//node et alors ? ;)
 
+//page.open est l'instruction de demarrage de phantomjs, elle nous donne une variable document qui est le DOM de la page
+//on peut acceder a ses noeuds et leurs attributs/parents etc
+        page.open(args[1], function (status) {
+//si tout se passe bien on fait
             if (status !== 'success') {
             } else {
+                //on applique la fonction sur la page
                 var mailTos = page.evaluate(function () {
+                    //on recupere tous les elements de tag a et on les met dans un tableau
                     var a = [].slice.call(document.querySelectorAll("a"));
+                    // ce qu'on va retourner
                     var aretourner = [];
+                    //on boucle sur a et on recupere tous les attributs href qui sont des mailtos, on fait un substring
+                    //pour ne prendre que l'adresse et pas le "mailto:"
                     for (var i = 0; i < a.length; i++) {
                         var href = a[i].getAttribute("href");
                         if (href != undefined && href.search("mailto:") != -1) {
@@ -29,7 +37,7 @@ var fs = require('fs');
                     console.log(mailTos[i]);
                 }
                 console.log("Nombre de mails recoltes " + mailTos.length);
-
+//instruction de fin de phantomjs, important! si on le met pas, ca tourne dans le vide
                 phantom.exit();
             }
         });
