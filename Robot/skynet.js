@@ -55,35 +55,6 @@ page.open(args[1], function(status) {
             }
 
 
-            // on enleve les scripts
-            var scripts = page.evaluate(function () {
-                var scripts = [].slice.call(document.querySelectorAll("script"));
-                for (var i = 0; i < scripts.length; i++) {
-                    var node = scripts[i];
-                    if (node.parentNode) {
-                        node.parentNode.removeChild(node);
-                    }
-                }
-            });
-
-            console.log("entree");
-            page.evaluate(function () {
-            // on enleve les balises style
-                [].slice.call(document.querySelectorAll("style")).forEach(function (arg, i) {
-                    var node = arg;
-                    if (node.parentNode) {
-                        node.parentNode.removeChild(node);
-                    }
-                });
-                // on enleve les aatributs style
-                [].slice.call(document.querySelectorAll("*")).forEach(function (arg, i) {
-                    if (arg.getAttribute("style")) {
-                        arg.removeAttribute("style");
-                    }
-                });
-            });
-            console.log("sortie");
-
             // on ecrase a.html avec la nouvelle page sans css et js
             var js = page.evaluate(function ()   {
                 return document;

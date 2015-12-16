@@ -16,6 +16,7 @@ var fs = require('fs');
         page.open(args[1], function (status) {
 //si tout se passe bien on fait
             if (status !== 'success') {
+                console.log("echec");
             } else {
                 //on applique la fonction sur la page
                 var mailTos = page.evaluate(function () {
@@ -33,9 +34,13 @@ var fs = require('fs');
                     }
                     return aretourner;
                 });
+                var string = "";
                 for (var i = 0; i < mailTos.length; i++) {
                     console.log(mailTos[i]);
+                    string+=mailTos[i]+",";
                 }
+                console.log("ici");
+                fs.write("C:\\Users\\Pierre\\Desktop\\ProjetOption\\JS\\Robot\\JS\\mailtos"+args[2]+".txt",string,'w');
                 console.log("Nombre de mails recoltes " + mailTos.length);
 //instruction de fin de phantomjs, important! si on le met pas, ca tourne dans le vide
                 phantom.exit();
