@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sprint2 R10112015</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+/* Markdown.css */
+/* Authors: Kevin Burke: http://kev.inburke.com/, modified by Evan Wondrasek  */
+/* https://bitbucket.org/kevinburke/markdowncss */
+
+body{
+    margin: 10px 10px;
+    font-family: Georgia, Palatino, serif;
+    color: #444444;
+    line-height: 1;
+    max-width: 1400px;
+    text-align: justify;
+    background-color:#f2efd9;
+}
+
+h1 {
+	font-family: candara;
+ 	color: #555555;
+ 	margin: 30px 0 20px 0;
+ 	font-weight: 800;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+h2 {
+	font-family: candara;
+	color: #e75c5c;
+ 	font-weight: 900;
+    font-size: 22px;
+    margin: 60px 0 20px 0;
+    border-bottom: 1px solid #e75c5c; 
+    max-width: 1400px;
+}
+
+h3 {
+	font-family: candara;
+	color: #5c9454;
+	font-weight: 800;
+    font-size: 21px;
+    margin: 40px 0 10px 20px;
+}
+
+h4 {
+	font-family: candara;
+	color: #4b6fbd;
+ 	font-weight: bold;
+    font-size: 18px;
+    margin: 20px 0 10px 50px;
+    text-decoration: underline;
+}
+
+h5 {
+	font-family: candara;
+ 	color: #000000;
+ 	font-weight: 200;
+    font-size: 16px;
+   	margin: 16px 0 6px 70px;
+   	text-decoration: underline;
+}
+
+a {
+    color: #555555;
+    text-decoration: none;
+    border-bottom: none;
+}
+a/h2 {
+	color: #000000;
+}
+
+a:hover {
+   
+}
+a:visited {
+   color: #333333;
+}
+ul, ol {
+    padding: 0;
+    margin: 0;
+}
+li {
+    line-height: 24px;
+    margin-left: 44px;
+}
+li ul, li ul {
+    margin-left: 24px;
+}
+p, ul, ol {
+    font-size: 14px;
+    line-height: 20px;
+}
+pre {
+    padding: 0px 24px;
+    white-space: pre-wrap;
+}
+code {
+    font-family: Consolas, Monaco, Andale Mono, monospace;
+    line-height: 1.5;
+    font-size: 13px;
+}
+aside {
+    display: block;
+    float: right;
+    width: 390px;
+}
+blockquote {
+    border-left:.5em solid #eee;
+    padding: 0 2em;
+    margin-left:0;
+    max-width: 476px;
+}
+blockquote  cite {
+    font-size:14px;
+    line-height:20px;
+    color:#111111;
+}
+blockquote cite:before {
+    content: '\2014 \00A0';
+}
+
+blockquote p {  
+    color: #808080;
+    max-width: 460px;
+}
+hr {
+    width: 540px;
+    text-align: left;
+    margin: 0 auto 0 0;
+    color: #111111;
+}
+
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  margin: 0;
+  vertical-align: baseline;
+  *vertical-align: middle;
+}
+button, input {
+  line-height: normal;
+  *overflow: visible;
+}
+button::-moz-focus-inner, input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  cursor: pointer;
+  -webkit-appearance: button;
+}
+input[type=checkbox], input[type=radio] {
+  cursor: pointer;
+}
+/* override default chrome & firefox settings */
+input:not([type="image"]), textarea {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+label,
+input,
+select,
+textarea {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: normal;
+  margin-bottom: 18px;
+}
+input[type=checkbox], input[type=radio] {
+  cursor: pointer;
+  margin-bottom: 0;
+}
+input[type=text],
+input[type=password],
+textarea,
+select {
+  display: inline-block;
+  width: 210px;
+  padding: 4px;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+  height: 18px;
+  color: #808080;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+select, input[type=file] {
+  height: 27px;
+  line-height: 27px;
+}
+textarea {
+  height: auto;
+}
+
+/* grey out placeholders */
+:-moz-placeholder {
+  color: #bfbfbf;
+}
+::-webkit-input-placeholder {
+  color: #bfbfbf;
+}
+
+input[type=text],
+input[type=password],
+select,
+textarea {
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+input[type=text]:focus, input[type=password]:focus, textarea:focus {
+  outline: none;
+  border-color: rgba(82, 168, 236, 0.8);
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+}
+
+/* buttons */
+button {
+  display: inline-block;
+  padding: 4px 14px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  background-color: #0064cd;
+  background-repeat: repeat-x;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#049cdb), to(#0064cd));
+  background-image: -moz-linear-gradient(top, #049cdb, #0064cd);
+  background-image: -ms-linear-gradient(top, #049cdb, #0064cd);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #049cdb), color-stop(100%, #0064cd));
+  background-image: -webkit-linear-gradient(top, #049cdb, #0064cd);
+  background-image: -o-linear-gradient(top, #049cdb, #0064cd);
+  background-image: linear-gradient(top, #049cdb, #0064cd);
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  border: 1px solid #004b9a;
+  border-bottom-color: #003f81;
+  -webkit-transition: 0.1s linear all;
+  -moz-transition: 0.1s linear all;
+  transition: 0.1s linear all;
+  border-color: #0064cd #0064cd #003f81;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+button:hover {
+  color: #fff;
+  background-position: 0 -15px;
+  text-decoration: none;
+}
+button:active {
+  -webkit-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+</style>
+</head>
+<body>
+<h1>Compte rendu de la réunion du 10.11.2015 :</h1>
+<p><em>Personnes présentes : Hervé Grall, Joël Bouhier &amp; Aurore Claude</em></p>
+<h3>Pour faire le schéma général du Pot de Miel</h3>
+<p>Il faut bien définir les différents modules, les interfaces et les interactions entre les différents modules.
+Ce schéma sera utilisé en guise de rappel au début de chaque réunion.</p>
+<p><strong>Client / Web</strong> : requête / page Web, une adresse fraîche par méthode</p>
+<p><strong>Lien avec le BDD</strong> : requête + liste des adresses de la réponse + contexte serveur (/!\ : heure, date, etc)</p>
+<p>Rq : vérifier que l'horloge est parfaitement synchronisée pour ne pas avoir de délai entre le moment où l'on affiche les adresses et la date à laquelle le robot récupère les adresses.</p>
+<h3>Partie mail</h3>
+<p>Pour chaque adresse affichée, il faut un compte utilisateur associé.</p>
+<h5>Au niveau du serveur mail :</h5>
+<p>Il est sous <strong>Unix</strong>.</p>
+<p>Il y a des comptes utilisateur caractérisés par le couple {nom, mot de passe}. Le <em>nom</em> est connu mais le <em>mot de passe</em> est crypté. Le super administrateur, appelé <strong>root</strong>, a lui aussi un mot de passe (envoyé par Alain, cf. mail). Le problème c'est qu'une fois que l'on supprime quelque chose en tant que root, il est impossible de le récupérer. </p>
+<p>Hervé a donc créé un autre compte de nom <strong>admin</strong> et de mot de passe <strong>admingsi</strong> (cf. mail Hervé Grall). L'administrateur va gérer les groupes utilisateurs mais il ne peut pas réellement créer des comptes utilisateurs. Il va surtout nous servir pour lire les fichiers à la réception. </p>
+<p>Pour les commandes, regarder les références envoyées par Hervé Grall par mail. Celles qui nous seront utiles sont celles qui servent à la manipulation des fichiers.</p>
+<p>Pour ajouter des mails, toutes les adresses se trouveront sur un fichier. Il ne faut pas l'effacer car sinon tout est perdu. Il vaut mieux le vider et le remplir.</p>
+<h5>Création adresses mail</h5>
+<p>Il faut regarder les caractères qui sont possibles (les '.' sont-ils autorisés ?, les chiffres ?).
+Vérifier si la génération de l'adresse &quot;hgrall&quot; est faite automatiquement ou si elle est à faire à la main : Hervé Grall -&gt; hgrall ? A tester : les underscores, les chaines de caractères plus longues que de 8 caractères, etc. Puis voir le résultat.</p>
+<h5>Dans la pratique</h5>
+<p>Nous allons utiliser un SSH pour se connecter de façon sécurisée à distance au serveur mail.</p>
+<p><strong>Shell</strong> : interpréteur de commande qui permet d'intéragir avec le système. Elle s'exécute dans le système (lire / détruire / déplacer un fichier, gérer les utilisateurs / les processus). Le shell, c'est lorsque l'on ait directement sur la machine. Mais à distance, on utilise le SSH qui permet de se connecter sur une machine distante en ligne de commande (S pour Secure, ainsi les mots de passe sont protégés). </p>
+<p>Pour ce faire il faut <strong>installer Cyguin</strong> pour avoir un shell Linux sous Windows.</p>
+<p>Pour vérifier que les adresses affichées sur la page soient bien celles qui sont créées sur le serveur mail, on peut utiliser du SSH dans le PHP. On établit la connexion SSH directement depuis le code PHP. Ainsi, on crée des lots d'adresses. Par ex. 1000 noms dès qu'inférieur à 500 dans ce cas on recrée un lot de 1000. Il faut isoler le générateur de nom qui permet à la fois de <strong>créer les adresses sur la page Web</strong> et aussi la <strong>création des comptes utilisateurs</strong>. </p>
+<h5>Générateur de nom</h5>
+<h6>Deux possibilités :</h6>
+<ul>
+<li>
+<p>soit on utilise un compteur qui suit le parcours des tables avec le nom et prénom pour savoir quel est le suivant, puis on remplit une autre table où l'on associe la requête à la liste de {nom, prénom} utilisés. Dans ce cas, on remplit la BDD au moment de la requête.</p>
+</li>
+<li>
+<p>ou sinon on utilise des noms frais que l'on va chercher dans un document.</p>
+</li>
+</ul>
+<p>Hervé préfère très largement la deuxième option.</p>
+<h6>Possibilité n°2</h6>
+<p><em>Explications :</em> la base de donnée est pré-remplie. Dans ce cas, on vient lire la ligne, on regarde quel est le suivant et on remplit avec le corps de la requête. Car permet de n'appeler qu'une fois le générateur de {nom, prénom} et de créer les comptes mail associés. Ainsi, il ne faut pas créer de compteur, c'est plus simple.</p>
+<p>Plusieurs possibilités : on met les nouveaux noms dans un fichier -&gt; on pré-remplit la base -&gt; on envoit au serveur mail qui va exécuter le script avec les noms reçus. Ce script va lire le fichier et créer des utilisateurs. </p>
+<p>Autre possibilité : faire en php, des add user un par un. </p>
+<p>Pour le mot de passe, on peut toujours mettre le même (/!\ si contrôle de robustesse lors de la création des comptes mail).</p>
+<p>Avant de les exécuter, on les montre (au lieu de add user, on affiche la commande) et on <strong>n'utilise pas directement le root</strong>. On attend l'aval des tuteurs. </p>
+<p>A savoir faire : lire ligne par ligne un fichier, récupérer un fichier, créer un utilisateur.</p>
+<p>On doit se renseigner sur quel genre de site vont les robots ? + référencer le site sur le map de l'école + mettre des liens vers d'autres pages =&gt; faire en sorte que ce soit un minimum attractif.</p>
+<h3>Compétences à acquérir :</h3>
+<ul>
+<li>Sur php, regarder comment on exécute des scripts SSH (ssh 2 ?)</li>
+<li>Pouvoir déclencher une action lorsque le compteur prend des valeurs particulières si on choisit la première option pour le générateur de nom.</li>
+<li>Comment gérer la concurrence : si deux robots veulent prendre en même temps les mêmes adresses, il faut faire en sorte que le compteur soit incrémenté de 2 et non de 1, on utilise PDO pour l'appel à la BDD (gérer la transaction, beginTransaction(), endTransaction()). <strong>Le contrôle de la concurrence doit être opérationnel dès la première version.</strong></li>
+<li>En second lieu, il faut voir comment gérer le nombre de requête si celui-ci explose, il faut arrêter le service. Il peut y avoir des soucis dans la BDD sinon. Par ex. au dessus de 100 par seconde.</li>
+</ul>
+<p>Au niveau de l'écriture de script : le langage est très concis donc c'est assez facile de faire des erreurs syntaxique. C'est pourquoi, il faut suivre un petit tutoriel. Nos tuteurs ne sont pas très calés en SSH donc il faut bien lire la documentation en ligne avant de poser des questions.</p>
+<p>Mais pour les questions simples, ne pas hésiter à les contacter pour éviter de perdre du temps inutilement !</p>
+<hr />
+<hr />
+<hr />
+<hr />
+<p><strong>TODO :</strong></p>
+<p>Dans 10 jours : avoir un prototype qui fonctionne avec la création de compte à la main.</p>
+<ul>
+<li><strong>Schéma de la BDD</strong> (ce qu'il y a dans les tables, les liens entre les tables [clé(s) primaire(s), clé(s) secondaire(s), etc. A faire pour vendredi, dernier délai, et à envoyer aux tuteurs)</li>
+<li>Faire le module de la génération de nom avec pré-remplissage de la BDD et &quot;création&quot; des comptes utilisateurs (option n° pour le générateur de nom) en SSH et à intégrer au PHP</li>
+<li>Fichier : génération du fichier qui va permettre de remplir la BDD et générer les comptes utilisateurs =&gt; pourquoi ne pas faire des issues sur le github ? Au début, proposer une implémentation triviale puis la peaufiner petit à petit (<strong>Méthodes Agiles</strong>). On sépare bien les interfaces, des implémentations pour pouvoir modifier l'implémentation sans modifier les interfaces.</li>
+</ul>
+<p>Remarques :</p>
+<ul>
+<li>Thread : voir si ça existe en PHP pour gérer l'évenement.</li>
+<li>Pour envoyer des mails : ne pas utiliser les adresses intérieures de l'école sinon ça ne marche pas.</li>
+</ul>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
