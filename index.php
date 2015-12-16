@@ -80,35 +80,40 @@
 			<br/><br/>
 			Nous travaillons en étroite collaboration avec des apiculteurs de la région nantaise. Si vous souhaitez à tout hasard en savoir plus sur les produits qu'ils fabriquent, vous pouvez les contacter par mail aux adresses suivantes:
 			<br/>
-			<?php
-    		$reponse1 = $bdd->query('SELECT strNOM, strPRENOM FROM METHODE_MAIL WHERE intID = 1');
-    		$donnees1 = $reponse1->fetch();
-  			?>
-  			<p align="center">
-	  			<a href="mailto:<?php echo $donnees1['strNOM'].".".$donnees1['strPRENOM'].$donneesID['intID']; ?>@emn.miel.fr">
-	    			<?php echo $donnees1['strNOM'].".".$donnees1['strPRENOM'].$donneesID['intID']; ?>@emn.miel.fr
-	  			</a>
-  			</p>
-  			
+			
 			<?php
 				$reponse2 = $bdd->query('SELECT strNOM, strPRENOM FROM METHODE_MAIL WHERE intID = 2');
 				$donnees2 = $reponse2->fetch();
 			?>
-				<p align="center"><?php echo $donnees2['strNOM'].".".$donnees2['strPRENOM'].$donneesID['intID']; ?>@emn.miel.fr</p>
+			<p align="center"><?php echo $donnees2['strNOM'].".".$donnees2['strPRENOM'].$donneesID['intID']; ?>@miel.emn.fr</p>
 			
 			<?php
-			$reponse3 = $bdd->query('SELECT strNOM, strPRENOM FROM METHODE_MAIL WHERE intID = 3');
-		    $donnees3 = $reponse3->fetch();
-			$adresseASCII = $donnees3['strNOM'].".".$donnees3['strPRENOM'].$donneesID['intID'].'@emn.miel.fr';
-			$resultASCII = mb_convert_encoding($adresseASCII,"ASCII","auto");
-			$mailASCII = "mailto:";
-			$resultmail = mb_convert_encoding($mailASCII,"ASCII","auto");
+				$reponse4 = $bdd->query('SELECT strNOM, strPRENOM FROM METHODE_MAIL WHERE intID = 4');
+				$donnees4 = $reponse4->fetch();
 			?>
 			<p align="center">
-				<a href="<?php echo $resultmail.$resultASCII;?>">
-					<?php echo $resultASCII;?>
-				</a>
+				<?php echo $donnees4['strNOM'].".".$donnees4['strPRENOM'].$donneesID['intID']; ?>@<!--potde-->miel.emn.fr
 			</p>
+       		
+			<?php
+				$reponse5 = $bdd->query('SELECT strNOM, strPRENOM FROM METHODE_MAIL WHERE intID = 5');
+				$donnees5 = $reponse5->fetch();
+			?>
+	        <p align="center">
+				<?php echo $donnees5['strNOM'].".".$donnees5['strPRENOM'].$donneesID['intID']; ?>@<span class="no_display">potde</span>miel.emn.fr
+	        </p>
+	        
+	        <p align="center">
+		        <span class="mirror">
+					<?php
+						$reponse6 = $bdd->query('SELECT strNOM, strPRENOM FROM METHODE_MAIL WHERE intID = 6');
+						$donnees6 = $reponse6->fetch();
+						$adresseMirror = $donnees6['strNOM'].".".$donnees6['strPRENOM'].$donneesID['intID']."@miel.emn.fr";
+						$resultMirror = strrev($adresseMirror);
+						echo $resultMirror;
+					?>
+				</span>
+	        </p>
 		</p>
     </div>
     <div>
@@ -163,32 +168,28 @@
 			Nous sommes une équipe de 5 personnes à faire ce travail sur le miel afin de vous concocter de délicieux produits à base de miel. Si vous souhaitez nous joindre, voici nos adresses mails:
 			<br/>
 			<?php
-				$reponse4 = $bdd->query('SELECT strNOM, strPRENOM FROM METHODE_MAIL WHERE intID = 4');
-				$donnees4 = $reponse4->fetch();
+    		$reponse1 = $bdd->query('SELECT strNOM, strPRENOM FROM METHODE_MAIL WHERE intID = 1');
+    		$donnees1 = $reponse1->fetch();
+  			?>
+  			<p align="center">
+	  			<a href="mailto:<?php echo $donnees1['strNOM'].".".$donnees1['strPRENOM'].$donneesID['intID']; ?>@emn.miel.fr">
+	    			<?php echo $donnees1['strNOM'].".".$donnees1['strPRENOM'].$donneesID['intID']; ?>@miel.emn.fr
+	  			</a>
+  			</p>
+
+  			<?php
+			$reponse3 = $bdd->query('SELECT strNOM, strPRENOM FROM METHODE_MAIL WHERE intID = 3');
+		    $donnees3 = $reponse3->fetch();
+			$adresseASCII = $donnees3['strNOM'].".".$donnees3['strPRENOM'].$donneesID['intID'].'@miel.emn.fr';
+			$resultASCII = mb_convert_encoding($adresseASCII,"ASCII","auto");
+			$mailASCII = "mailto:";
+			$resultmail = mb_convert_encoding($mailASCII,"ASCII","auto");
 			?>
 			<p align="center">
-				<?php echo $donnees4['strNOM'].".".$donnees4['strPRENOM'].$donneesID['intID']; ?>@emn.<!--potde-->miel.fr
+				<a href="<?php echo $resultmail.$resultASCII;?>">
+					<?php echo $resultASCII;?>
+				</a>
 			</p>
-       		
-			<?php
-				$reponse5 = $bdd->query('SELECT strNOM, strPRENOM FROM METHODE_MAIL WHERE intID = 5');
-				$donnees5 = $reponse5->fetch();
-			?>
-	        <p align="center">
-				<?php echo $donnees5['strNOM'].".".$donnees5['strPRENOM'].$donneesID['intID']; ?>@emn.<span class="no_display">potde</span>miel.fr
-	        </p>
-	        
-	        <p align="center">
-		        <span class="mirror">
-					<?php
-						$reponse6 = $bdd->query('SELECT strNOM, strPRENOM FROM METHODE_MAIL WHERE intID = 6');
-						$donnees6 = $reponse6->fetch();
-						$adresseMirror = $donnees6['strNOM'].".".$donnees6['strPRENOM'].$donneesID['intID']."@emn.miel.fr";
-						$resultMirror = strrev($adresseMirror);
-						echo $resultMirror;
-					?>
-				</span>
-	        </p>
 	        
 	        <p align="center" id="ObfuscationJS1"></p>
 	        
@@ -196,7 +197,7 @@
 				<?php
 					$reponse9 = $bdd->query('SELECT strNOM, strPRENOM FROM METHODE_MAIL WHERE intID = 9');
 					$donnees9 = $reponse9->fetch();
-					$adresseRot13 = $donnees9['strNOM'].".".$donnees9['strPRENOM'].$donneesID['intID']."@emn.miel.fr";
+					$adresseRot13 = $donnees9['strNOM'].".".$donnees9['strPRENOM'].$donneesID['intID']."@miel.emn.fr";
 					$mailrot13 = "mailto:";
 					$resultadresserot13 = str_rot13($adresseRot13);
 					$resultRot13 = str_rot13($mailrot13.$adresseRot13);
@@ -217,7 +218,7 @@
 					<?php
 						$reponse7 = $bdd->query('SELECT strNOM, strPRENOM FROM METHODE_MAIL WHERE intID = 7');
 						$donnees7 = $reponse7->fetch();
-						$adresseImage =  $donnees7['strNOM'].".".$donnees7['strPRENOM'].$donneesID['intID']."@emn.miel.fr";
+						$adresseImage =  $donnees7['strNOM'].".".$donnees7['strPRENOM'].$donneesID['intID']."@miel.emn.fr";
 						`./texteffect -t "{$adresseImage}" -e wave-top -d 1 -w 1 -i 45 -f Arial -p 48 -l 1 test.png`;
 					?>
 				    <img src="test.png" alt="mail" title="mail">
