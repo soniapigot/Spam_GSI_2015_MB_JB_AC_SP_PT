@@ -1,5 +1,10 @@
-node robotAvecCheerio.js "https://web.emn.fr/x-info/miel/PotDeMiel.php";
-phantomjs robot.js "http://localhost/projetoption/a/a.html";
-node scripts.js;
-phantomjs robot.js "http://localhost/projetoption/b/b.html";
-phantomjs robot.js "https://web.emn.fr/x-info/miel/PotDeMiel.php";
+node robotAvecCheerio.js %1 ;
+phantomjs enleveCSS.js "http://localhost/projetoption/" "a" ;
+phantomjs enleveJS.js "http://localhost/projetoption/" "b" ;
+phantomjs enleveJS.js "http://localhost/projetoption/" "a" ;
+phantomjs skynet.js "http://localhost/projetoption/b/b.html" ;
+node scripts.js %1 ;
+phantomjs robot.js "http://localhost/projetoption/a/a.html" "1" ;
+phantomjs robot.js "http://localhost/projetoption/b/b.html" "2" ;
+phantomjs robot.js %1 "3" ;
+node difference.js ;
