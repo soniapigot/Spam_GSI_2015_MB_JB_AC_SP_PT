@@ -20,9 +20,9 @@ function liretxt(adresse){
     return b;
 }
 
-var adresses1 = liretxt("C:\\Users\\Pierre\\Desktop\\ProjetOption\\JS\\Robot\\JS\\mailtos1.txt").split(',');
-var adresses2 = liretxt("C:\\Users\\Pierre\\Desktop\\ProjetOption\\JS\\Robot\\JS\\mailtos2.txt").split(',');
-var adresses3 = liretxt("C:\\Users\\Pierre\\Desktop\\ProjetOption\\JS\\Robot\\JS\\mailtos3.txt").split(',');
+var adresses1 = liretxt(process.argv[2]+"\\Resultats\\mailtos1.txt").split(',');
+var adresses2 = liretxt(process.argv[2]+"\\Resultats\\mailtos2.txt").split(',');
+var adresses3 = liretxt(process.argv[2]+"\\Resultats\\mailtos3.txt").split(',');
 
 function inter(e1,e2){
 

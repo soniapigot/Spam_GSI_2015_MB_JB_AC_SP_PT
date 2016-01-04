@@ -19,9 +19,9 @@ request(process.argv[2], function (error, response, html) {
         //on ecrit 2 fichiers identiques mais qui vont etre utilises de maniere differentes: a sera sans CSS et JS
         //b sera avec CSS mais sans JS
 
-        fs.writeFile("D:\\XAMPP\\htdocs\\projetoption\\a\\a.html",a);
+        fs.writeFile(process.argv[3]+"\\a\\a.html",a);
 
-        fs.writeFile("D:\\XAMPP\\htdocs\\projetoption\\b\\b.html",a);
+        fs.writeFile(process.argv[3]+"\\b\\b.html",a);
         console.log('done');
         return a;
     }

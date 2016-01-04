@@ -6,7 +6,7 @@ var cheerio = require("cheerio");
 var request = require("request");
 var fs = require('fs');
 //on lit le fichier qui contient les adresses des liens vers les css
-var adressecss = fs.readFile("C:\\Users\\Pierre\\Desktop\\ProjetOption\\JS\\Robot\\JS\\adressecss.txt"
+var adressecss = fs.readFile(process.argv[3]+"\\adressecss.txt"
     ,'utf8',function(err,data){
 
         console.log(data);
@@ -28,7 +28,7 @@ var adressecss = fs.readFile("C:\\Users\\Pierre\\Desktop\\ProjetOption\\JS\\Robo
             if (!error && response.statusCode == 200) {
                 var $ = cheerio.load(html);
                 var a = $.html();
-                fs.writeFile("D:\\XAMPP\\htdocs\\projetoption\\b\\"+data,a);
+                fs.writeFile(process.argv[3]+"\\b\\"+data,a);
                 console.log('done');
             }
             else {

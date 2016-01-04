@@ -48,9 +48,9 @@ page.open(args[1], function(status) {
             for (var i = 0; i < css.length; i++) {
                 var cssi = css[i];
                 if (cssi.search(".css")) {
-                    var path = 'adressecss.txt';
+                    var path = '\\adressecss.txt';
                     var content = cssi;
-                    fs.write(path, content, 'w');
+                    fs.write(args[2]+path, content, 'w');
                 }
             }
 
@@ -60,7 +60,7 @@ page.open(args[1], function(status) {
                 return document;
             });
             var newAdress = js.all[0].outerHTML;
-            fs.write("D:\\XAMPP\\htdocs\\projetoption\\a\\a.html", newAdress, 'w');
+            fs.write(args[2]+"\\a\\a.html", newAdress, 'w');
 
             phantom.exit();
         }
