@@ -40,6 +40,9 @@ var fs = require('fs');
                     string+=mailTos[i]+",";
                 }
                 console.log("ici");
+                mkdirp(process.argv[3]+"\\Resultats", function(err) { 
+                    // path was created unless there was error
+                });
                 fs.write(args[3]+"\\Resultats\\mailtos"+args[2]+".txt",string,'w');
                 console.log("Nombre de mails recoltes " + mailTos.length);
 //instruction de fin de phantomjs, important! si on le met pas, ca tourne dans le vide
