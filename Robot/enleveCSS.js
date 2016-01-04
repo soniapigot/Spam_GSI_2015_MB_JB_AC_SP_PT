@@ -33,7 +33,7 @@ page.open(target, function(status) {
             return document;
         });
         var newAdress = js.all[0].outerHTML;
-        fs.write(args[3] + args[2] + "\\" + args[2] + ".html", newAdress, 'w');
+        fs.write(args[3] + "\\projetoption\\" + args[2] + "\\" + args[2] + ".html", newAdress, 'w');
 
         phantom.exit();
     }

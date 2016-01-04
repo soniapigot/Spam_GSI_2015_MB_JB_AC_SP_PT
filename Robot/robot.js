@@ -7,7 +7,6 @@ var system = require('system');
 var args = system.args;
 var page = require('webpage').create();
 var fs = require('fs');
-
 //args[1] est le premier argument qu'on passe quand on fait "phantomjs.exe robot.js {arg}". oui c'est pas comme pour
 //node et alors ? ;)
 
@@ -40,10 +39,7 @@ var fs = require('fs');
                     string+=mailTos[i]+",";
                 }
                 console.log("ici");
-                mkdirp(process.argv[3]+"\\Resultats", function(err) { 
-                    // path was created unless there was error
-                });
-                fs.write(args[3]+"\\Resultats\\mailtos"+args[2]+".txt",string,'w');
+                fs.write(args[3]+"\\projetoption\\Resultats\\mailtos"+args[2]+".txt",string,'w');
                 console.log("Nombre de mails recoltes " + mailTos.length);
 //instruction de fin de phantomjs, important! si on le met pas, ca tourne dans le vide
                 phantom.exit();

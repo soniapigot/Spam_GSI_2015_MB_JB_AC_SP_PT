@@ -7,6 +7,7 @@ var system = require('system');
 var args = system.args;
 var page = require('webpage').create();
 var fs = require('fs');
+
 console.log(args[1]);
 page.open(args[1], function(status) {
 //si tout se passe bien on fait
@@ -48,19 +49,19 @@ page.open(args[1], function(status) {
             for (var i = 0; i < css.length; i++) {
                 var cssi = css[i];
                 if (cssi.search(".css")) {
-                    var path = '\\adressecss.txt';
+                    var path = '\\projetoption\\adressecss.txt';
                     var content = cssi;
                     fs.write(args[2]+path, content, 'w');
                 }
             }
 
-
+			
             // on ecrase a.html avec la nouvelle page sans css et js
             var js = page.evaluate(function ()   {
                 return document;
             });
             var newAdress = js.all[0].outerHTML;
-            fs.write(args[2]+"\\a\\a.html", newAdress, 'w');
+            fs.write(args[2]+"\\projetoption\\a\\a.html", newAdress, 'w');
 
             phantom.exit();
         }
