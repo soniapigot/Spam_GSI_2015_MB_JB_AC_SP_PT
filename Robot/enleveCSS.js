@@ -11,6 +11,8 @@ page.open(target, function(status) {
     console.log(target);
     if (status != "success") {
         console.log("echec");
+        phantom.exit();
+
     }
     else {
         page.evaluate(function () {

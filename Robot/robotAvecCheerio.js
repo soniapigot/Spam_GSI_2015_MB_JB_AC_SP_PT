@@ -44,7 +44,8 @@ request(process.argv[2], function (error, response, html) {
         return a;
     }
     else {
-        //console.log("echec");
+        console.log("echec");
+        return ;
     }
 });
 

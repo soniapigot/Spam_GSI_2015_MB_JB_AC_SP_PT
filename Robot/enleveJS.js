@@ -12,7 +12,8 @@ var fs = require('fs');
 console.log(args[1]);
 page.open(args[1]+args[2]+"/"+args[2]+".html", function(status) {
     if (status != "success") {
-        console.log("echec");
+        console.log("echec")
+        phantom.exit();
     }
     else {
         page.evaluate(function () {

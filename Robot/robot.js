@@ -16,6 +16,7 @@ var fs = require('fs');
 //si tout se passe bien on fait
             if (status !== 'success') {
                 console.log("echec");
+                phantom.exit();
             } else {
                 //on applique la fonction sur la page
                 var mailTos = page.evaluate(function () {
