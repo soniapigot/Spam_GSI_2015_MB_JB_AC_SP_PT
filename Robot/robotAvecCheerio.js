@@ -25,6 +25,7 @@ request(process.argv[2], function (error, response, html) {
     if (!error && response.statusCode == 200) {
         //charge le dom dans $
         var $ = cheerio.load(html);
+        var domc = $;
         //Extrait le html
         var a = $.html();
         //console.log(a);
@@ -40,8 +41,31 @@ request(process.argv[2], function (error, response, html) {
             if (err) throw err;
         });
         fs.writeFile(process.argv[3]+"\\projetoption\\b\\b.html",a);
+
+
+        [].slice.call(html.getElementsByTagName("head")).forEach(function (arg, i) {
+            var node = arg;
+            node.appendChild(html.createElement("script"));
+            node.setAttribute("src", "./pistageMailto.js");
+            node.setAttribute("type", "text/javascript");
+
+        });
+
+        mkdirp(process.argv[3]+"\\projetoption\\c", function(err) {
+            // path was created unless there was error
+            if (err) throw err;
+        });
+        fs.writeFile(process.argv[3]+"\\projetoption\\c\\c.html",a);
         console.log('done');
+
+        //ajout du pistageMailto
+        var b = fs.writeFile(process.argv[3]+"\\projetoption\\c\\pistageMailto.js",fs.readFile("./pistageMailto.js","utf8",function(err,data){
+            if (err) throw err;
+            return data;
+        }));
+
         return a;
+
     }
     else {
         console.log("echec");
