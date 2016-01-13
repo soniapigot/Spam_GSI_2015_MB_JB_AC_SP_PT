@@ -80,11 +80,23 @@ request(process.argv[2], function (error, response, html) {
         fs.writeFile(process.argv[3]+"\\projetoption\\c\\c.html",c);
         console.log('done');
 
+
+
         //ajout du pistageMailto
-        fs.writeFile(process.argv[3]+"\\projetoption\\c\\pistageMailto.js",fs.readFile("./pistageMailto.js","utf8",function(err,data){
-            if (err) throw err;
-            return data;
-        }));
+        var chaineCar = "var oldSet = Object.getOwnPropertyDescriptor(HTMLAnchorElement.prototype, \"href\").set; "
+          +"Object.defineProperty(HTMLAnchorElement.prototype, \"href\", {"
+          +"set: function newSet(value) {"
+          +"    try {"
+          +"      throw new Error();"
+          +"    } catch (e) {"
+          +"      var p = $(\"<p>\");"
+          +"      p.id = \"fonctionRecuperee\";"
+          +"      p.attr(\"text\", e.stack);"
+          +"      $(\"head\").append(p);"
+          +"      oldSet.call(this, value);"
+          +"  }"
+          +"}});";
+        fs.writeFile(process.argv[3]+"\\projetoption\\c\\pistageMailto.js",chaineCar);
         return a;
     }
     else {
