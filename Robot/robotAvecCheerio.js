@@ -10,17 +10,17 @@ var mkdirp = require('mkdirp');
 var dir = process.argv[3]+"\\projetoption";
 
 var deleteFolderRecursive = function(path) {
-  if(fs.existsSync(path)) {
-    fs.readdirSync(path).forEach(function(file,index){
-      var curPath = path + "/" + file;
-      if(fs.lstatSync(curPath).isDirectory()) { // recurse
-        deleteFolderRecursive(curPath);
-      } else { // delete file
-        fs.unlinkSync(curPath);
-      }
-    });
-    fs.rmdirSync(path);
-  }
+    if(fs.existsSync(path)) {
+        fs.readdirSync(path).forEach(function(file,index){
+            var curPath = path + "/" + file;
+            if(fs.lstatSync(curPath).isDirectory()) { // recurse
+                deleteFolderRecursive(curPath);
+            } else { // delete file
+                fs.unlinkSync(curPath);
+            }
+        });
+        fs.rmdirSync(path);
+    }
 };
 
 if (fs.existsSync(dir)){
@@ -67,7 +67,7 @@ request(process.argv[2], function (error, response, html) {
 
         //On ajoute une balise script dans le html pour le pistage du mailto
         var script = $("<script>");
-        script.id = "pistage";
+        script.attr("id", "pistagemailto");
         script.attr("src", "./pistageMailto.js");
         script.attr("type", "text/javascript");
         $("head").append(script);
@@ -84,18 +84,18 @@ request(process.argv[2], function (error, response, html) {
 
         //ajout du pistageMailto
         var chaineCar = "var oldSet = Object.getOwnPropertyDescriptor(HTMLAnchorElement.prototype, \"href\").set; "
-          +"Object.defineProperty(HTMLAnchorElement.prototype, \"href\", {"
-          +"set: function newSet(value) {"
-          +"    try {"
-          +"      throw new Error();"
-          +"    } catch (e) {"
-          +"      var p = $(\"<p>\");"
-          +"      p.id = \"fonctionRecuperee\";"
-          +"      p.attr(\"text\", e.stack);"
-          +"      $(\"head\").append(p);"
-          +"      oldSet.call(this, value);"
-          +"  }"
-          +"}});";
+            +"Object.defineProperty(HTMLAnchorElement.prototype, \"href\", {"
+            +"set: function newSet(value) {"
+            +"    try {"
+            +"      throw new Error();"
+            +"    } catch (e) {"
+            +"      var p = $(\"<p>\");"
+            +"      p.attr(\"class\", \"recuperececi\");"
+            +"      p.attr(\"text\", e.stack);"
+            +"      $(\"head\").append(p);"
+            +"      oldSet.call(this, value);"
+            +"  }"
+            +"}});";
         fs.writeFile(process.argv[3]+"\\projetoption\\c\\pistageMailto.js",chaineCar);
         return a;
     }
