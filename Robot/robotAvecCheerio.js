@@ -7,17 +7,36 @@ var cheerio = require("cheerio");
 var request = require("request");
 var fs = require('fs');
 var mkdirp = require('mkdirp');
-console.log("entre");
-mkdirp(process.argv[3]+"\\projetoption", function(err) { 
+var dir = process.argv[3]+"\\projetoption";
+
+var deleteFolderRecursive = function(path) {
+  if(fs.existsSync(path)) {
+    fs.readdirSync(path).forEach(function(file,index){
+      var curPath = path + "/" + file;
+      if(fs.lstatSync(curPath).isDirectory()) { // recurse
+        deleteFolderRecursive(curPath);
+      } else { // delete file
+        fs.unlinkSync(curPath);
+      }
+    });
+    fs.rmdirSync(path);
+  }
+};
+
+if (fs.existsSync(dir)){
+    deleteFolderRecursive(dir);
+    console.log("dossier supprime");
+}
+//Creation du dossier projetoption
+mkdirp(process.argv[3]+"\\projetoption", function(err) {
     // path was created unless there was error
     console.log("projetoption dossier créer");
     if (err) throw err;
 });
-mkdirp(process.argv[3]+"\\projetoption\\Resultats", function(err) { 
+mkdirp(process.argv[3]+"\\projetoption\\Resultats", function(err) {
     // path was created unless there was error
     if (err) throw err;
 });
-console.log("sortie");
 //process.argv[2] est l'argument qu'on passe apres node robotAvecCheerio.js {arg}
 request(process.argv[2], function (error, response, html) {
     console.log(process.argv[2]);
@@ -28,48 +47,48 @@ request(process.argv[2], function (error, response, html) {
         var domc = $;
         //Extrait le html
         var a = $.html();
-        //console.log(a);
         //on ecrit 2 fichiers identiques mais qui vont etre utilises de maniere differentes: a sera sans CSS et JS
         //b sera avec CSS mais sans JS
-        mkdirp(process.argv[3]+"\\projetoption\\a", function(err) { 
+
+        //Creation du dossier a
+        mkdirp(process.argv[3]+"\\projetoption\\a", function(err) {
             // path was created unless there was error
             if (err) throw err;
         });
+        //On ecrit, dans un fichier a.html qui est dans le dossier a cree precedement, le html de la page traitee
         fs.writeFile(process.argv[3]+"\\projetoption\\a\\a.html",a);
-        mkdirp(process.argv[3]+"\\projetoption\\b", function(err) { 
+        //Creation du dossier b
+        mkdirp(process.argv[3]+"\\projetoption\\b", function(err) {
             // path was created unless there was error
             if (err) throw err;
         });
+        //On ecrit, dans un fichier b.html qui est dans le dossier b cree precedement, le html de la page traitee
         fs.writeFile(process.argv[3]+"\\projetoption\\b\\b.html",a);
 
-
-        [].slice.call(html.getElementsByTagName("head")).forEach(function (arg, i) {
-            var node = arg;
-            node.appendChild(html.createElement("script"));
-            node.setAttribute("src", "./pistageMailto.js");
-            node.setAttribute("type", "text/javascript");
-
-        });
+        //On ajoute une balise script dans le html pour le pistage du mailto
+        var script = $("<script>");
+        script.id = "pistage";
+        script.attr("src", "./pistageMailto.js");
+        script.attr("type", "text/javascript");
+        $("head").append(script);
+        var c = $.html();
 
         mkdirp(process.argv[3]+"\\projetoption\\c", function(err) {
             // path was created unless there was error
             if (err) throw err;
         });
-        fs.writeFile(process.argv[3]+"\\projetoption\\c\\c.html",a);
+        fs.writeFile(process.argv[3]+"\\projetoption\\c\\c.html",c);
         console.log('done');
 
         //ajout du pistageMailto
-        var b = fs.writeFile(process.argv[3]+"\\projetoption\\c\\pistageMailto.js",fs.readFile("./pistageMailto.js","utf8",function(err,data){
+        fs.writeFile(process.argv[3]+"\\projetoption\\c\\pistageMailto.js",fs.readFile("./pistageMailto.js","utf8",function(err,data){
             if (err) throw err;
             return data;
         }));
-
         return a;
-
     }
     else {
         console.log("echec");
         return ;
     }
 });
-

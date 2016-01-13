@@ -9,7 +9,11 @@ var mkdirp = require('mkdirp');
 //on lit le fichier qui contient les adresses des liens vers les css
 var adressecss = fs.readFile(process.argv[3]+"\\projetoption\\adressecss.txt",'utf8',function(err,data){
     //if (err) throw err;
-    if (err){return ;}
+    if (err){return;}
+    if(data.length==0){
+      console.log("Pas de chemin relatif pour le CSS.");
+      return;
+    }
     datas = data.split(",");
     for (var i=0; i<datas.length;i++) {
 
@@ -47,12 +51,12 @@ var adressecss = fs.readFile(process.argv[3]+"\\projetoption\\adressecss.txt",'u
             if (cible[0] == 'h') {
                 console.log(cible);
                 var taille = cible.length;
-                var i = 8;
+                var l = 8;
                 //on coupe l'URL initiale jusqu'a avoir l'adresse apres laquelle concatener les "./css/style.css" et autres
-                while (i <= taille && cible[i] != "/") {
-                    i++;
+                while (l <= taille && cible[l] != "/") {
+                    l++;
                 }
-                cible = cible.substring(0, i);
+                cible = cible.substring(0, l+1);
                 cible = cible + datas[i];
                 console.log("cible: " + cible);
 
@@ -97,7 +101,3 @@ var adressecss = fs.readFile(process.argv[3]+"\\projetoption\\adressecss.txt",'u
         }
     }
 });
-
-
-
-
