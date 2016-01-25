@@ -3,8 +3,8 @@
  */
 
 // crée le a.html avec le html de la page (sans exécution du JS et application du CSS
-var cheerio = require("cheerio");
-var request = require("request");
+var cheerio = require('cheerio');
+var request = require('request');
 var fs = require('fs');
 var mkdirp = require('mkdirp');
 var dir = process.argv[3]+"\\projetoption";
@@ -28,12 +28,12 @@ if (fs.existsSync(dir)){
     console.log("dossier supprime");
 }
 //Creation du dossier projetoption
-mkdirp(process.argv[3]+"\\projetoption", function(err) {
+mkdirp.sync(process.argv[3]+"\\projetoption", function(err) {
     // path was created unless there was error
     console.log("projetoption dossier créer");
     if (err) throw err;
 });
-mkdirp(process.argv[3]+"\\projetoption\\Resultats", function(err) {
+mkdirp.sync(process.argv[3]+"\\projetoption\\Resultats", function(err) {
     // path was created unless there was error
     if (err) throw err;
 });
@@ -51,36 +51,23 @@ request(process.argv[2], function (error, response, html) {
         //b sera avec CSS mais sans JS
 
         //Creation du dossier a
-        mkdirp(process.argv[3]+"\\projetoption\\a", function(err) {
+        mkdirp.sync(process.argv[3]+"\\projetoption\\a", function(err) {
             // path was created unless there was error
             if (err) throw err;
         });
         //On ecrit, dans un fichier a.html qui est dans le dossier a cree precedement, le html de la page traitee
-        fs.writeFile(process.argv[3]+"\\projetoption\\a\\a.html",a);
+        fs.writeFileSync(process.argv[3]+"\\projetoption\\a\\a.html",a);
         //Creation du dossier b
-        mkdirp(process.argv[3]+"\\projetoption\\b", function(err) {
+        mkdirp.sync(process.argv[3]+"\\projetoption\\b", function(err) {
             // path was created unless there was error
             if (err) throw err;
         });
         //On ecrit, dans un fichier b.html qui est dans le dossier b cree precedement, le html de la page traitee
-        fs.writeFile(process.argv[3]+"\\projetoption\\b\\b.html",a);
-
-        //On ajoute une balise script dans le html pour le pistage du mailto
-        var script = $("<script>");
-        script.attr("id", "pistagemailto");
-        script.attr("src", "./pistageMailto.js");
-        script.attr("type", "text/javascript");
-        $("head").append(script);
-        var c = $.html();
-
-        mkdirp(process.argv[3]+"\\projetoption\\c", function(err) {
+        fs.writeFileSync(process.argv[3]+"\\projetoption\\b\\b.html",a);
+        mkdirp.sync(process.argv[3]+"\\projetoption\\c", function(err) {
             // path was created unless there was error
             if (err) throw err;
         });
-        fs.writeFile(process.argv[3]+"\\projetoption\\c\\c.html",c);
-        console.log('done');
-
-
 
         //ajout du pistageMailto
         var chaineCar = "var oldSet = Object.getOwnPropertyDescriptor(HTMLAnchorElement.prototype, \"href\").set; "
@@ -89,14 +76,30 @@ request(process.argv[2], function (error, response, html) {
             +"    try {"
             +"      throw new Error();"
             +"    } catch (e) {"
-            +"      var p = $(\"<p>\");"
+            +"      var p = $(\"<div>\");"
             +"      p.attr(\"class\", \"recuperececi\");"
-            +"      p.attr(\"text\", e.stack);"
+            +"      p.text(e.stack);"
             +"      $(\"head\").append(p);"
             +"      oldSet.call(this, value);"
             +"  }"
             +"}});";
-        fs.writeFile(process.argv[3]+"\\projetoption\\c\\pistageMailto.js",chaineCar);
+        fs.writeFileSync(process.argv[3]+"\\projetoption\\c\\pistageMailto.js",chaineCar);
+
+        //On ajoute une balise script dans le html pour le pistage du mailto
+        var script = $("<script>");
+        script.attr("id", "pistagemailto");
+        script.attr("src", "./pistageMailto.js");
+        script.attr("type", "text/javascript");
+        $("head").append(script);
+        var contenuC = $.html();
+
+       
+        fs.writeFileSync(process.argv[3]+"\\projetoption\\c\\c.html",contenuC);
+        console.log('done');
+
+
+
+
         return a;
     }
     else {

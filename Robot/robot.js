@@ -44,25 +44,30 @@ page.open(args[1], function (status) {
             console.log("Nombre de mails recoltes " + mailTos.length);
         }
         else{
-            var scriptS = page.evaluate(function(){
-                var scripts = [].slice.call(document.querySelectorAll("p"));
-                var ret = [];
+         	var strTest = "";
+         	//do {
+	        	/*var classeTest = document.getElementsByClassName("recuperececi");
+	        	for(var h=0;h<classeTest.length;h++){
+	        		strTest+=classeTest.innerHTML;
+	        	}*/
+        		var test = page.evaluate(function(){
+	                var scripts = [].slice.call(document.querySelectorAll("script"));
+	                var ret = [];
+	                retS = "";
+	                for (var j = 0;j<scripts.length;j++){
+	                    ret.push(scripts[j].getAttribute('id'));
+	                }
+	                for (var o=0;o<ret.length;o++){
+	                    retS+=ret[o] + ",";
+	                }
+	                //return retS;
+	                return retS;
+	            });
+        	//} while (strTest=="");
+            
 
-                for (var j = 0;j<scripts.length;j++){
-                   // if(scripts[j].getAttribute("class")=="recuperececi") {
-                        ret.push(scripts[j]);
-                   // }
-                }
-                return ret;
-            });
-            //console.log(scriptS);
+			fs.write(args[3]+"\\projetoption\\Resultats\\mailtos"+args[2]+".txt",test,'w');
 
-            console.log(scriptS.length);
-            for (var k = 0;k<scriptS.length;k++){
-
-                console.log(scriptS[k].getAttribute("class"));
-
-            }
         }
 
 //instruction de fin de phantomjs, important! si on le met pas, ca tourne dans le vide
