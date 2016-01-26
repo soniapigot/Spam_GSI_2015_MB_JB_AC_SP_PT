@@ -68,8 +68,11 @@ console.log("---------");
 console.log("---------");
 console.log("---------RESULTAT FINAL-----------");
 console.log("\nE1 est compose de :"+E1fin.toString());
+fs.writeFileSync(process.argv[2]+"\\projetoption\\Resultats\\mailtos1.txt",E1fin.toString());
 console.log("\nE2 est compose de :"+E2fin.toString());
+fs.writeFileSync(process.argv[2]+"\\projetoption\\Resultats\\mailtos2.txt",E2fin.toString());
 console.log("\nE3 est compose de :"+E3fin.toString());
+fs.writeFileSync(process.argv[2]+"\\projetoption\\Resultats\\mailtos3.txt",E3fin.toString());
 
 
 
