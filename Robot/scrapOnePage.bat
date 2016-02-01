@@ -1,0 +1,11 @@
+node getRawHTMLCode.js %1 %2 ;
+phantomjs removeCSS.js "http://localhost/projetoption/" "a" %2 ;
+phantomjs removeJS.js "http://localhost/projetoption/" "b" %2 ;
+phantomjs removeJS.js "http://localhost/projetoption/" "a" %2 ;
+phantomjs getCSSaddress.js "http://localhost/projetoption/b/b.html" %2 ;
+node getCSScode.js %1 %2 ;
+phantomjs scraper.js "http://localhost/projetoption/a/a.html" "1" %2 ;
+phantomjs scraper.js "http://localhost/projetoption/b/b.html" "2" %2 ;
+phantomjs scraper.js %1 "3" %2 ;
+phantomjs scraper.js "http://localhost/projetoption/c/c.html" "4" %2 ;
+node setDistribution.js %2 ;

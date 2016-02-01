@@ -83,12 +83,12 @@ request(process.argv[2], function (error, response, html) {
             +"      oldSet.call(this, value);"
             +"  }"
             +"}});";
-        fs.writeFileSync(process.argv[3]+"\\projetoption\\c\\pistageMailto.js",chaineCar);
+        fs.writeFileSync(process.argv[3]+"\\projetoption\\c\\mailtoTracking.js",chaineCar);
 
         //On ajoute une balise script dans le html pour le pistage du mailto
         var script = $("<script>");
-        script.attr("id", "pistagemailto");
-        script.attr("src", "./pistageMailto.js");
+        script.attr("id", "mailtoTracking");
+        script.attr("src", "./mailtoTracking.js");
         script.attr("type", "text/javascript");
         $("head").append(script);
         var contenuC = $.html();
