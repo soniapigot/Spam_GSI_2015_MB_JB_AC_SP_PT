@@ -1,6 +1,7 @@
 package mailParsing;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -19,17 +20,19 @@ public class CsvMail {
 
 	public static void main(String[] args) throws MessagingException, IOException {
 
-		// on efface à chaque exécution du programme le fichier csv existant pour le mettre à jour 
+		// on efface ï¿½ chaque exï¿½cution du programme le fichier csv existant pour le mettre ï¿½ jour 
 		PrintWriter writer = new PrintWriter(new File("mails.csv"));
 		writer.print("");
 		writer.print("id;MAIL_DESTINATAIRE;MAIL_EXPEDITEUR;MAIL_DATE;MAIL_IP" + NEW_LINE_SEPARATOR);
 		
-        // pour chaque fichier dans le répertoire mail, on crée une String comportant les éléments à inscrire dans le tableau
+        // pour chaque fichier dans le rï¿½pertoire mail, on crï¿½e une String comportant les ï¿½lï¿½ments ï¿½ inscrire dans le tableau
 		File dir = new File("mail");
 		File[] directoryListing = dir.listFiles();
 		List<String> liste = new ArrayList<String>();
 		if (directoryListing != null) {
 			for (File child : directoryListing) {			    
+				FileReader fr = new FileReader(child);
+				
 				String childString = "\"" + mailParsing.getID("mail/" + child.getName())
 						+ "\"" + COMMA_DELIMITER + "\""
 						+mailParsing.getDestinataire("mail/" +child.getName())

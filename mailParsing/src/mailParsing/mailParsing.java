@@ -1,11 +1,16 @@
 package mailParsing;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -16,32 +21,60 @@ import javax.mail.internet.MimeMessage;
 
 public class mailParsing {
 
-	/** @return ID de la requête ayant mené à l'envoi du mail */	
+	/** @return ID de la requï¿½te ayant menï¿½ ï¿½ l'envoi du mail */	
 	public static int getID(String mail) throws FileNotFoundException, MessagingException{
 		InputStream mailFileInputStream = new FileInputStream(mail);
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 		MimeMessage message = new MimeMessage(session, mailFileInputStream);
-		
+
 		Address[] recipients = message.getAllRecipients();
 		String recipient =  recipients[0].toString();
-		
-		//Cherche l'ID en filtrant par une expression régulière l'adresse du destinataire
+
+		//Cherche l'ID en filtrant par une expression rï¿½guliï¿½re l'adresse du destinataire
 		Scanner in = new Scanner(recipient).useDelimiter("[^0-9]+");
 		return in.nextInt();
 	}
-	
+
+
+	public static void mySplit(String mail) throws IOException{
+		BufferedReader br = new BufferedReader(new FileReader(mail));
+		int i = 0;
+		String s1 = br.readLine();
+		String s2 = br.readLine();
+		PrintWriter pw = new PrintWriter(mail+"_"+i,"UTF-8");
+		pw.println(s1);
+		s1 = new String(s2);
+		s2 = br.readLine();
+
+		while(s2!=null){
+			if (s2.contains(">From")){
+				System.out.println("rentreif");
+				i++;
+				pw.close();
+				pw = new PrintWriter(mail+"_"+i,"UTF-8");	
+				
+			}
+			pw.println(s1);
+			s1 = new String(s2);
+			s2 = br.readLine();
+		}
+		pw.println(s1);
+		pw.close();
+	}
+
+
 	/** @return destinataire du mail */
 	public static String getDestinataire(String mail) throws MessagingException, FileNotFoundException{
 		InputStream mailFileInputStream = new FileInputStream(mail);
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 		MimeMessage message = new MimeMessage(session, mailFileInputStream);
-		
+
 		Address[] recipients = message.getAllRecipients();
 		String recipient =  recipients[0].toString();
-		
-		// Récupère l'identifiant du destinataire sans les chevrons
+
+		// Rï¿½cupï¿½re l'identifiant du destinataire sans les chevrons
 		Pattern pattern = Pattern.compile("<(.*?)@");
 		Matcher matcher = pattern.matcher(recipient);
 		if(matcher.find()){
@@ -51,20 +84,20 @@ public class mailParsing {
 		else{
 			return null;
 		}
-		
+
 	}
-	
-	/** @return expéditeur du mail */
+
+	/** @return expï¿½diteur du mail */
 	public static String getExpediteur(String mail) throws FileNotFoundException, MessagingException{
 		InputStream mailFileInputStream = new FileInputStream(mail);
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 		MimeMessage message = new MimeMessage(session, mailFileInputStream);
-		
+
 		Address[] sender = message.getFrom();
 		String result = sender[0].toString();
-		
-		// Récupère l'adresse de l'expéditeur sans les chevrons
+
+		// Rï¿½cupï¿½re l'adresse de l'expï¿½diteur sans les chevrons
 		Pattern pattern = Pattern.compile("<(.*?)>");
 		Matcher matcher = pattern.matcher(result);
 		if(matcher.find()){
@@ -74,45 +107,45 @@ public class mailParsing {
 		else{
 			return null;
 		}
-		
+
 	}
-	
+
 	/** @return date d'envoi du mail */
 	public static String getDate(String mail) throws FileNotFoundException, MessagingException{
 		InputStream mailFileInputStream = new FileInputStream(mail);
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 		MimeMessage message = new MimeMessage(session, mailFileInputStream);
-		
+
 		Date date = message.getSentDate();
 		return date.toString();
 
 	}
-	
-	/** @return IP de l'expéditeur */
+
+	/** @return IP de l'expï¿½diteur */
 	public static String getIP(String mail) throws IOException{
-		
-		// lit et récupère le texte complet du fichier mail
+
+		// lit et rï¿½cupï¿½re le texte complet du fichier mail
 		BufferedReader br = new BufferedReader(new FileReader(mail));
 		String everything= "";
 		try {
-		    StringBuilder sb = new StringBuilder();
-		    String line = br.readLine();
+			StringBuilder sb = new StringBuilder();
+			String line = br.readLine();
 
-		    while (line != null) {
-		        sb.append(line);
-		        sb.append("\n");
-		        line = br.readLine();
-		    }
-		    everything = sb.toString();
+			while (line != null) {
+				sb.append(line);
+				sb.append("\n");
+				line = br.readLine();
+			}
+			everything = sb.toString();
 		} finally {
-		    br.close();
+			br.close();
 		}
-		
+
 		// cherche l'adresse IP en filtrant via une RegExp
 		Pattern pattern = Pattern.compile("(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}");
 		Matcher matcher = pattern.matcher(everything);
-		// boucle imbriquée pour trouver la DEUXIEME IP, la première étant celle de kgb.emn.fr
+		// boucle imbriquï¿½e pour trouver la DEUXIEME IP, la premiï¿½re ï¿½tant celle de kgb.emn.fr
 		if(matcher.find()){
 			if(matcher.find()){
 				String aRetourner = matcher.group();
@@ -123,10 +156,19 @@ public class mailParsing {
 		else{
 			return null;
 		}
-		
-		
-		
+
+
+
 	}
-	
+
+	public static void main(String[] args) {
+		try {
+			mySplit("mail/bodin.thomas117");
+			System.out.println("done");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }
