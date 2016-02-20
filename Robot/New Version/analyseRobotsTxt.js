@@ -1,8 +1,9 @@
 var robots = require('robots')
   , parser = new robots.RobotsParser();
- 
+
 parser.setUrl('http://www.france.aide-et-action.org/robots.txt', function(parser, success) {
   if(success) {
+    
   	var split1 = (parser.parse("").chunks[0]).split("Disallow: ");
   	var disallow = [];
   	for (var i = 0;i<split1.length;i++) {
